@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOVE — 5-Day Weekly Gym Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:#0f2620; --pine-2:#163a30; --pine-3:#1d4a3d;
+    --cream:#f4f1e7; --lime:#c9f24d; --clay:#e08a5a;
+    --ink:#0a1713; --muted:#9db5a9; --line:rgba(201,242,77,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--pine);color:var(--cream);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+  a{color:var(--lime)}
+
+  nav{position:sticky;top:0;z-index:50;background:rgba(15,38,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:6px;height:56px;overflow-x:auto}
+  .brand{font-family:'Archivo Black',sans-serif;letter-spacing:.02em;font-size:18px;margin-right:auto;white-space:nowrap}
+  .brand span{color:var(--lime)}
+  nav a.navlink{color:var(--muted);text-decoration:none;font-family:'Archivo',sans-serif;font-weight:600;font-size:13px;padding:6px 10px;border-radius:8px;white-space:nowrap}
+  nav a.navlink:hover{color:var(--cream);background:var(--pine-2)}
+
+  header.hero{padding:54px 0 30px;background:radial-gradient(120% 90% at 15% -10%,var(--pine-2),var(--pine) 60%)}
+  .eyebrow{font-family:'Archivo',sans-serif;font-weight:800;letter-spacing:.22em;text-transform:uppercase;font-size:12px;color:var(--lime);margin-bottom:14px}
+  h1.big{font-family:'Archivo Black',sans-serif;font-size:clamp(40px,9vw,84px);line-height:.9;letter-spacing:-.02em;text-transform:uppercase}
+  h1.big span{color:var(--lime)}
+  .lede{margin-top:16px;color:var(--muted);max-width:52ch;font-size:16px}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+  .pill{border:1px solid rgba(201,242,77,.35);color:var(--lime);border-radius:999px;padding:6px 14px;font-size:12px;font-weight:600;font-family:'Archivo',sans-serif;letter-spacing:.04em}
+
+  .tracker{margin-top:30px;background:var(--pine-2);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:16px}
+  @media(min-width:720px){.tracker{grid-template-columns:1.2fr 1fr;align-items:center}}
+  .tracker h3{font-family:'Archivo',sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.05em;font-size:14px;color:var(--lime);margin-bottom:10px}
+  .namerow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  input.name{flex:1;min-width:160px;background:var(--pine);border:1px solid var(--line);color:var(--cream);border-radius:10px;padding:11px 13px;font-size:14px;font-family:'Inter'}
+  input.name:focus{outline:2px solid var(--lime);outline-offset:1px}
+  .stats{display:flex;gap:10px;flex-wrap:wrap}
+  .stat{flex:1;min-width:92px;background:var(--pine);border-radius:12px;padding:12px;text-align:center;border:1px solid var(--line)}
+  .stat b{display:block;font-family:'Archivo Black',sans-serif;font-size:30px;line-height:1;color:var(--lime)}
+  .stat small{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-family:'Archivo';font-weight:600}
+  .btn{cursor:pointer;border:none;font-family:'Archivo',sans-serif;font-weight:800;letter-spacing:.03em;border-radius:12px;padding:13px 18px;font-size:14px;text-transform:uppercase;transition:transform .05s ease,filter .15s ease}
+  .btn:active{transform:translateY(1px)}
+  .btn-lime{background:var(--lime);color:var(--ink)}
+  .btn-lime:hover{filter:brightness(1.05)}
+  .btn-lime[disabled]{background:var(--pine-3);color:var(--muted);cursor:default}
+  .btn-ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
+
+  section{padding:44px 0;border-top:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+  .sec-num{font-family:'Archivo Black',sans-serif;color:var(--pine-3);font-size:clamp(34px,6vw,52px);line-height:1}
+  h2{font-family:'Archivo Black',sans-serif;font-size:clamp(26px,5vw,40px);text-transform:uppercase;letter-spacing:-.01em}
+  .sec-sub{color:var(--muted);margin:8px 0 26px;max-width:62ch}
+
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:600px){.grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:940px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+  .card{background:var(--pine-2);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .demo{position:relative;aspect-ratio:4/3;background:#eceae2;display:flex;align-items:center;justify-content:center}
+  .demo img{width:100%;height:100%;object-fit:cover;display:block}
+  .demo .fallback{font-size:44px;color:#8a9a90}
+  .demo .tagpos{position:absolute;top:10px;left:10px;background:rgba(10,23,19,.82);color:var(--lime);font-family:'Archivo';font-weight:700;font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:999px}
+  .card-body{padding:15px 16px 16px;display:flex;flex-direction:column;flex:1}
+  .card-body h4{font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;letter-spacing:-.01em}
+  .meta{color:var(--lime);font-family:'Archivo';font-weight:600;font-size:12px;letter-spacing:.04em;text-transform:uppercase;margin:3px 0 9px}
+  .how{color:#d8e2db;font-size:13.5px;flex:1}
+  .logrow{display:flex;gap:8px;margin-top:14px;align-items:center}
+  input.log{flex:1;min-width:0;background:var(--pine);border:1px solid var(--line);color:var(--cream);border-radius:9px;padding:9px 11px;font-size:13px;font-family:'Inter'}
+  input.log:focus{outline:2px solid var(--lime);outline-offset:1px}
+  .check{cursor:pointer;border:1px solid var(--line);background:var(--pine);color:var(--muted);border-radius:9px;width:44px;height:38px;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .check.on{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+  .tab{cursor:pointer;background:var(--pine-2);border:1px solid var(--line);color:var(--muted);border-radius:12px;padding:11px 15px;font-family:'Archivo';font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.03em}
+  .tab .d{display:block;font-size:16px;color:var(--cream)}
+  .tab.active{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+  .tab.active .d{color:var(--ink)}
+  .tab.rest{opacity:.8}
+  .day-panel{display:none}
+  .day-panel.show{display:block}
+  .day-focus{font-family:'Archivo';font-weight:600;color:var(--lime);text-transform:uppercase;letter-spacing:.05em;font-size:13px;margin-bottom:4px}
+  .day-note{color:var(--muted);font-size:14px;margin-bottom:6px}
+  .progline{display:flex;align-items:center;gap:12px;margin:14px 0 22px}
+  .bar{flex:1;height:10px;background:var(--pine);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .bar i{display:block;height:100%;width:0;background:var(--lime);transition:width .3s ease}
+  .progtxt{font-family:'Archivo';font-weight:700;font-size:13px;color:var(--muted);white-space:nowrap}
+
+  .lb-note{background:var(--pine-2);border:1px solid var(--line);border-radius:12px;padding:12px 15px;color:var(--muted);font-size:13px;margin-bottom:18px}
+  table.lb{width:100%;border-collapse:collapse;background:var(--pine-2);border-radius:16px;overflow:hidden}
+  table.lb th{font-family:'Archivo';font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:11px;color:var(--muted);text-align:left;padding:14px 16px;border-bottom:1px solid var(--line)}
+  table.lb td{padding:14px 16px;border-bottom:1px solid var(--line);font-size:15px}
+  table.lb tr:last-child td{border-bottom:none}
+  table.lb .rank{font-family:'Archivo Black';font-size:18px;width:52px}
+  table.lb .who{font-weight:600}
+  table.lb tr.me{background:rgba(201,242,77,.08)}
+  table.lb tr.me .who::after{content:" (you)";color:var(--lime);font-size:12px;font-weight:600}
+  .num{font-family:'Archivo Black';color:var(--lime)}
+  .empty{color:var(--muted);text-align:center;padding:28px;font-size:14px}
+
+  .mcard{background:var(--pine-2);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+  .mtop{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:linear-gradient(90deg,rgba(201,242,77,.14),rgba(201,242,77,0));border-bottom:1px solid var(--line)}
+  .mnum{font-family:'Archivo Black';font-size:22px;color:var(--lime);line-height:1}
+  .mtag{font-family:'Archivo';font-weight:700;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:right}
+  .mbody{padding:15px 16px 18px}
+  .mbody h4{font-family:'Archivo';font-weight:800;font-size:17px}
+  .mhold{display:inline-block;color:var(--lime);font-family:'Archivo';font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin:4px 0 9px}
+  .tips{margin-top:22px;background:var(--pine-2);border:1px solid rgba(201,242,77,.4);border-radius:14px;padding:16px 18px}
+  .tips h5{font-family:'Archivo';font-weight:800;color:var(--lime);text-transform:uppercase;letter-spacing:.08em;font-size:12px;margin-bottom:9px}
+  .tips ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .tips li{padding-left:18px;position:relative;font-size:14px;color:#d8e2db}
+  .tips li::before{content:"\203A";position:absolute;left:3px;color:var(--lime);font-weight:800}
+  footer{padding:40px 16px 60px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.7;border-top:1px solid var(--line)}
+  footer .wrap{max-width:66ch}
+  .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);background:var(--lime);color:var(--ink);font-family:'Archivo';font-weight:800;padding:13px 22px;border-radius:12px;opacity:0;pointer-events:none;transition:all .25s ease;z-index:100;text-transform:uppercase;letter-spacing:.03em;font-size:13px}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <div class="brand">MOVE<span>.</span></div>
+  <a class="navlink" href="#warmup">Warm-up</a>
+  <a class="navlink" href="#week">The Week</a>
+  <a class="navlink" href="#cooldown">Cooldown</a>
+  <a class="navlink" href="#mobility">Mobility</a>
+  <a class="navlink" href="#friends">Friends</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">5 Days · 1 Hour · Steady Progress</div>
+  <h1 class="big">Move<br><span>Every</span> Week</h1>
+  <p class="lede">A balanced strength-and-cardio plan built to keep your muscle, lift your energy, and get you fitter over months — not a crash. Log your reps each day, keep a streak, and climb the leaderboard with friends.</p>
+  <div class="pills"><span class="pill">Strength ×3</span><span class="pill">Cardio ×2</span><span class="pill">Warm-up + Cooldown</span><span class="pill">Track + Compete</span></div>
+
+  <div class="tracker">
+    <div>
+      <h3>Your tracker</h3>
+      <div class="namerow">
+        <input class="name" id="nameInput" placeholder="Enter your name to track + join friends" maxlength="24" autocomplete="off">
+        <button class="btn btn-lime" id="completeBtn">Complete today 💪</button>
+      </div>
+      <p style="color:var(--muted);font-size:12.5px;margin-top:10px" id="statusLine">Check off exercises below as you go, then log the day.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="stTotal">0</b><small>Workouts</small></div>
+      <div class="stat"><b id="stStreak">0</b><small>Day streak</small></div>
+      <div class="stat"><b id="stToday">0%</b><small>Today</small></div>
+    </div>
+  </div>
+</div></header>
+
+<section id="warmup"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Warm-up Library</h2></div>
+  <p class="sec-sub">Do 8–10 minutes before every session. Pick 4–5 of these dynamic moves — they raise your heart rate and loosen the joints so you move well and stay injury-free. Aim for ~40 seconds each.</p>
+  <div class="grid" id="warmupGrid"></div>
+</div></section>
+
+<section id="week"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">02</span><h2>The Weekly Plan</h2></div>
+  <p class="sec-sub">Five focused sessions a week. Tap a day, follow the moves, and check each one off as you finish. Log your reps or weight so you can see yourself getting stronger.</p>
+  <div class="tabs" id="dayTabs"></div>
+  <div id="dayPanels"></div>
+</div></section>
+
+<section id="cooldown"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Cooldown Stretches</h2></div>
+  <p class="sec-sub">Finish every session with 5 minutes of easy stretching. Hold each for 20–30 seconds, breathe, and never bounce. This is how you recover faster and stay flexible.</p>
+  <div class="grid" id="cooldownGrid"></div>
+</div></section>
+
+<section id="mobility"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Full-Body Mobility Flow</h2></div>
+  <p class="sec-sub">Breathe deep, move smooth, feel open. A gentle flow to move through on rest days or after training — flow slowly from one pose to the next, spending a few breaths in each.</p>
+  <div class="grid" id="mobilityGrid"></div>
+  <div class="tips"><h5>Tips</h5><ul>
+    <li>Breathe slowly through each position.</li>
+    <li>Let gravity deepen the stretch \u2014 don't push.</li>
+    <li>Stay relaxed, and never force your range.</li>
+  </ul></div>
+</div></section>
+
+<section id="friends"><div class="wrap">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Friends Leaderboard</h2></div>
+  <p class="sec-sub">Every time you complete a day's workout, your total and streak post here. Get your friends on the same page and race each other to the top.</p>
+  <div class="lb-note" id="lbNote">Heads-up: your name, workout count and streak are shared with everyone using this page. Pick a name your friends will recognise.</div>
+  <table class="lb"><thead><tr><th class="rank">#</th><th>Name</th><th>Workouts</th><th>Streak</th></tr></thead>
+    <tbody id="lbBody"><tr><td colspan="4" class="empty">Loading…</td></tr></tbody>
+  </table>
+  <div style="margin-top:16px"><button class="btn btn-ghost" id="refreshLb">↻ Refresh leaderboard</button></div>
+</div></section>
+
+<footer><div class="wrap">
+  Built for sustainable progress, not a 30-day crash — aim for roughly 0.5–1 kg loss per week alongside good food and sleep. Exercise demos are from the open-source free-exercise-db (public domain). If you've been inactive for a while, get a check-up first, and if any body-goal pressure ever starts to feel consuming, that's worth talking through with a doctor or another professional you trust.
+</div></footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const BASE = "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises";
+const EX = {
+  arm_circles:{id:"Arm_Circles",name:"Arm Circles",meta:"40 sec · both ways",how:"Stand tall, arms out to the sides, and draw small circles that grow bigger. Reverse direction halfway."},
+  hip_circles:{id:"Standing_Hip_Circles",name:"Standing Hip Circles",meta:"40 sec",how:"Hands on hips, feet apart, and rotate your hips in slow wide circles — like spinning a hula hoop."},
+  torso:{id:"Torso_Rotation",name:"Torso Twists",meta:"40 sec",how:"Soft knees, feet shoulder-width, and twist your upper body side to side, letting your arms swing loosely."},
+  butt_kicks:{id:"Single_Leg_Butt_Kick",name:"Butt Kicks",meta:"40 sec",how:"Jog on the spot, flicking each heel up toward your glutes to wake up the hamstrings."},
+  mtn:{id:"Mountain_Climbers",name:"Mountain Climbers",meta:"40 sec",how:"In a plank, drive one knee then the other toward your chest at a steady, controlled pace."},
+  inchworm:{id:"Inchworm",name:"Inchworm",meta:"6–8 reps",how:"From standing, fold and walk your hands out to a plank, then walk your feet back to your hands."},
+  catcow:{id:"Cat_Stretch",name:"Cat-Cow",meta:"8 slow reps",how:"On all fours, round your back up, then dip it down, moving gently with your breath."},
+  warm_squat:{id:"Bodyweight_Squat",name:"Easy Squats",meta:"10 reps",how:"Feet shoulder-width, sit hips back and down, then stand. Light and easy to loosen the legs."},
+
+  squat:{id:"Bodyweight_Squat",name:"Bodyweight Squat",meta:"3 × 10–12",how:"Chest up, hips back, knees tracking over your toes. Lower until thighs are near parallel, then drive up."},
+  pushup:{id:"Pushups",name:"Push-ups",meta:"3 × 10–12",how:"Hands under shoulders, body in a straight line. Lower your chest, then press up. Knees down is fine."},
+  row:{id:"Bent_Over_Two-Dumbbell_Row",name:"Dumbbell Rows",meta:"3 × 10–12",how:"Hinge at the hips with a flat back, pull the weights to your ribs, squeezing your shoulder blades."},
+  bridge:{id:"Barbell_Glute_Bridge",name:"Glute Bridge",meta:"3 × 12–15",how:"On your back, feet flat, drive your hips up to a straight line and squeeze your glutes at the top."},
+  plank:{id:"Plank",name:"Plank",meta:"3 × 30–45 sec",how:"Forearms down, body straight from head to heels. Hold, keeping your core tight and hips level."},
+
+  lunge:{id:"Bodyweight_Walking_Lunge",name:"Walking Lunges",meta:"3 × 10 / leg",how:"Step forward and lower until both knees are about 90°, then push through the front heel and step through."},
+  rdl:{id:"Romanian_Deadlift",name:"Romanian Deadlift",meta:"3 × 10–12",how:"Slight knee bend, hinge at the hips pushing them back, lower the weights along your legs, then stand tall."},
+  calf:{id:"Standing_Calf_Raises",name:"Calf Raises",meta:"3 × 15",how:"Rise onto the balls of your feet, pause at the top, then lower slowly under control."},
+  stepup:{id:"Step-up_with_Knee_Raise",name:"Step-ups",meta:"3 × 10 / leg",how:"Step onto a bench, drive the opposite knee up, then step down softly. Swap legs each set."},
+  deadbug:{id:"Dead_Bug",name:"Dead Bug",meta:"3 × 10 / side",how:"On your back, arms up, knees bent 90°. Slowly lower the opposite arm and leg, then switch."},
+  bike:{id:"Air_Bike",name:"Bicycle Crunch",meta:"3 × 20",how:"Hands by your head, bring the opposite elbow to knee in a smooth, controlled pedalling motion."},
+
+  press:{id:"Dumbbell_Shoulder_Press",name:"Shoulder Press",meta:"3 × 10–12",how:"Press the weights overhead from shoulder height until your arms are straight, then lower with control."},
+  chest:{id:"Dumbbell_Bench_Press",name:"Chest Press",meta:"3 × 10–12",how:"Lower the weights to chest level with elbows at ~45°, then press them up over your chest."},
+  row1:{id:"One-Arm_Dumbbell_Row",name:"One-Arm Row",meta:"3 × 10 / arm",how:"Supported on a bench, pull the weight to your hip, squeezing your back, then lower slowly."},
+  curl:{id:"Dumbbell_Bicep_Curl",name:"Bicep Curls",meta:"3 × 12",how:"Elbows tucked to your sides, curl the weights up, then lower slowly — no swinging."},
+  dips:{id:"Bench_Dips",name:"Tricep Dips",meta:"3 × 10–12",how:"Hands on a bench behind you, lower your body by bending your elbows, then press back up."},
+  sideplank:{id:"Side_Bridge",name:"Side Plank",meta:"3 × 20–30 sec / side",how:"On your side on a forearm, lift your hips into a straight line and hold. Switch sides."},
+
+  cardio:{id:"Jogging_Treadmill",name:"Cardio Session",meta:"~45 min",how:""},
+
+  s_ham:{id:"Hamstring_Stretch",name:"Hamstring Stretch",meta:"20–30 sec / leg",how:"Sit with one leg out, reach gently toward your toes, and hold without bouncing."},
+  s_quad:{id:"All_Fours_Quad_Stretch",name:"Quad Stretch",meta:"20–30 sec / leg",how:"Reach back and hold your ankle, keeping knees together, to stretch the front of the thigh."},
+  s_child:{id:"Childs_Pose",name:"Child's Pose",meta:"30–45 sec",how:"Kneel and sit back on your heels, reach your arms forward, and let your chest relax down."},
+  s_cat:{id:"Cat_Stretch",name:"Cat-Cow",meta:"6 slow reps",how:"On all fours, gently round and arch your spine with your breath to release the back."},
+  s_calf:{id:"Calf_Stretch_Hands_Against_Wall",name:"Calf Stretch",meta:"20–30 sec / leg",how:"Hands on a wall, one foot back with the heel down, and lean in to feel the calf lengthen."},
+  s_chest:{id:"Behind_Head_Chest_Stretch",name:"Chest Stretch",meta:"20–30 sec",how:"Clasp your hands behind your head and gently draw your elbows back to open the chest."}
+};
+
+const WARMUPS = ["arm_circles","hip_circles","torso","butt_kicks","mtn","inchworm","catcow","warm_squat"];
+const COOLDOWN = ["s_ham","s_quad","s_child","s_cat","s_calf","s_chest"];
+const DAYS = [
+  {key:"mon",label:"Mon",focus:"Full-Body Strength",note:"3 rounds. Rest 45–60 sec between rounds. Start light, add weight as it gets easy.",ex:["squat","pushup","row","bridge","plank"]},
+  {key:"tue",label:"Tue",focus:"Cardio — Steady + Intervals",note:"15 min steady, then 1 min faster / 2 min easy × 8, then 6 min easy. Keep it so you can still breathe.",ex:["cardio"]},
+  {key:"wed",label:"Wed",focus:"Lower Body + Core",note:"3 rounds. Rest 45–60 sec. Control the lowering on every rep.",ex:["lunge","rdl","calf","stepup","deadbug","bike"]},
+  {key:"thu",label:"Thu",focus:"Cardio + Mobility",note:"30 min steady at a conversational pace, then 15 min of easy stretching and mobility.",ex:["cardio","s_ham"]},
+  {key:"fri",label:"Fri",focus:"Upper Body + Core",note:"3 rounds. Rest 45–60 sec. Full range of motion beats heavy and sloppy.",ex:["press","chest","row1","curl","dips","sideplank"]},
+  {key:"sat",label:"Sat/Sun",focus:"Rest & Recover",rest:true,note:"Full rest or an easy relaxed walk. Recovery — sleep and protein — is when progress actually happens."}
+];
+const MOBILITY = [
+  {name:"Seated Spinal Rotation",tag:"Spine \u00b7 Lower back",hold:"30 sec / side",how:"Sit tall with one leg crossed over the other. Twist gently toward the top knee, using your arm as a lever, and breathe into the length of your spine."},
+  {name:"Butterfly Sit",tag:"Hips \u00b7 Inner thigh",hold:"30\u201345 sec",how:"Sit with the soles of your feet together and let your knees fall open. Sit tall and gently ease the knees toward the floor."},
+  {name:"Cobra Stretch",tag:"Chest \u00b7 Abs \u00b7 Spine",hold:"20\u201330 sec",how:"Lie face down, hands under your shoulders, and press your chest up while keeping your hips on the floor. Relax the shoulders down."},
+  {name:"Downward Dog",tag:"Hamstrings \u00b7 Calves \u00b7 Back",hold:"30 sec",how:"From hands and feet, push your hips up and back into an inverted V. Reach your heels toward the floor and lengthen your spine."},
+  {name:"Deep Lunge",tag:"Hip flexors",hold:"30 sec / side",how:"Step one foot far forward and sink your hips low, back leg long. Let the front knee stack over the ankle and breathe into the back hip."},
+  {name:"Half Split",tag:"Hamstrings",hold:"30 sec / side",how:"From a low lunge, straighten the front leg and hinge forward over it with a flat back. Ease in slowly \u2014 no bouncing."},
+  {name:"Crescent Lunge",tag:"Hips \u00b7 Chest",hold:"30 sec / side",how:"In a deep lunge, lift your torso tall and reach both arms overhead. Draw the hips down and open through the chest."},
+  {name:"Lizard Lunge",tag:"Deep hip opener",hold:"30 sec / side",how:"Lunge with the front foot wide to the outside, then lower onto your forearms if it feels okay. Let the hip sink and soften."},
+  {name:"Deep Squat",tag:"Hips \u00b7 Ankles \u00b7 Groin",hold:"30\u201345 sec",how:"Drop into a low squat with heels down. Use your elbows to gently press your knees outward and lift your chest tall."},
+  {name:"Camel Pose",tag:"Front body \u00b7 Spine",hold:"20\u201330 sec",how:"Kneel tall, hands on your heels or lower back, and lift your chest toward the ceiling. Go gently \u2014 skip it if it pinches your lower back."},
+  {name:"Pigeon Pose",tag:"Glutes \u00b7 Hips",hold:"30\u201345 sec / side",how:"Bring one shin forward across the mat and extend the other leg back. Fold over the front leg and let the hip release."},
+  {name:"Child's Pose",tag:"Back \u00b7 Hips \u00b7 Rest",hold:"30\u201360 sec",how:"Kneel, sit back on your heels, and reach your arms forward with your chest relaxing down. Breathe slow and let everything soften."}
+];
+
+const hasStore = (typeof window !== "undefined" && window.storage && typeof window.storage.get === "function");
+const mem = new Map();
+const store = {
+  async get(k, shared=false){
+    if(hasStore){ try{ const r=await window.storage.get(k, shared); return r? r.value : null; }catch(e){ return null; } }
+    return mem.has((shared?"s:":"")+k)? mem.get((shared?"s:":"")+k) : null;
+  },
+  async set(k, v, shared=false){
+    if(hasStore){ try{ await window.storage.set(k, v, shared); return true; }catch(e){ return false; } }
+    mem.set((shared?"s:":"")+k, v); return true;
+  },
+  async list(prefix, shared=false){
+    if(hasStore){ try{ const r=await window.storage.list(prefix, shared); return (r&&r.keys)||[]; }catch(e){ return []; } }
+    const out=[]; for(const key of mem.keys()){ const bare=key.replace(/^s:/,""); const isShared=key.startsWith("s:"); if(isShared===shared && bare.startsWith(prefix)) out.push(bare); } return out;
+  }
+};
+
+const todayKey = ()=> new Date().toLocaleDateString("en-CA");
+let ST = { name:"", total:0, streak:0, last:"", days:{} };
+
+function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),1900); }
+
+async function loadState(){
+  const raw = await store.get("fit:state");
+  if(raw){ try{ ST = Object.assign(ST, JSON.parse(raw)); }catch(e){} }
+  if(!ST.days) ST.days = {};
+}
+async function saveState(){ await store.set("fit:state", JSON.stringify(ST)); }
+
+function cardHTML(key, section){
+  const e = EX[key];
+  const showLog = section==="day";
+  const f0 = `images/${e.id}/0.jpg`;
+  const f1 = `images/${e.id}/1.jpg`;
+  return `<div class="card" data-ex="${e.id}" data-key="${key}">
+    <div class="demo">
+      <img alt="${e.name} demonstration" data-f0="${f0}" data-f1="${f1}"
+           src="${f0}" loading="lazy"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <div class="fallback" style="display:none">🏋️</div>
+      ${e.meta?`<span class="tagpos">${e.meta}</span>`:""}
+    </div>
+    <div class="card-body">
+      <h4>${e.name}</h4>
+      ${e.how?`<p class="how">${e.how}</p>`:`<p class="how">Follow the interval plan in the note above. Move at an effort where you can still catch your breath.</p>`}
+      ${showLog?`<div class="logrow">
+        <input class="log" placeholder="log reps / kg / min" maxlength="40">
+        <div class="check" title="Mark done">✓</div>
+      </div>`:""}
+    </div>
+  </div>`;
+}
+
+function mobilityCardHTML(m,i){
+  const n=String(i+1).padStart(2,"0");
+  return `<div class="mcard"><div class="mtop"><span class="mnum">${n}</span><span class="mtag">${m.tag}</span></div><div class="mbody"><h4>${m.name}</h4><span class="mhold">Hold ${m.hold}</span><p class="how">${m.how}</p></div></div>`;
+}
+function renderStatic(){
+  document.getElementById("warmupGrid").innerHTML = WARMUPS.map(k=>cardHTML(k,"warm")).join("");
+  document.getElementById("cooldownGrid").innerHTML = COOLDOWN.map(k=>cardHTML(k,"cool")).join("");
+  document.getElementById("mobilityGrid").innerHTML = MOBILITY.map(mobilityCardHTML).join("");
+
+  const tabs = DAYS.map((d,i)=>`<div class="tab ${d.rest?'rest':''} ${i===0?'active':''}" data-i="${i}">${d.label}<span class="d">${d.rest?'Rest':d.focus.split(' ')[0]}</span></div>`).join("");
+  document.getElementById("dayTabs").innerHTML = tabs;
+
+  const panels = DAYS.map((d,i)=>{
+    if(d.rest){
+      return `<div class="day-panel ${i===0?'show':''}" data-i="${i}">
+        <div class="day-focus">${d.focus}</div><p class="day-note">${d.note}</p>
+        <div class="grid"><div class="card"><div class="card-body"><h4>Take it easy 🌿</h4><p class="how">${d.note}</p></div></div></div>
+      </div>`;
+    }
+    const prog = `<div class="progline"><div class="bar"><i data-bar="${d.key}"></i></div><span class="progtxt" data-progtxt="${d.key}">0 / ${d.ex.length} done</span></div>`;
+    return `<div class="day-panel ${i===0?'show':''}" data-i="${i}" data-day="${d.key}">
+      <div class="day-focus">${d.focus}</div><p class="day-note">${d.note}</p>${prog}
+      <div class="grid">${d.ex.map(k=>cardHTML(k,"day")).join("")}</div>
+    </div>`;
+  }).join("");
+  document.getElementById("dayPanels").innerHTML = panels;
+
+  document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{
+    const i=t.dataset.i;
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    document.querySelectorAll(".day-panel").forEach(x=>x.classList.remove("show"));
+    t.classList.add("active");
+    document.querySelector(`.day-panel[data-i="${i}"]`).classList.add("show");
+  }));
+}
+
+function hydrateDayCards(){
+  const today = ST.days[todayKey()] || {done:{},notes:{}};
+  document.querySelectorAll('.day-panel[data-day]').forEach(panel=>{
+    panel.querySelectorAll('.card').forEach(card=>{
+      const exId = card.dataset.ex;
+      const check = card.querySelector('.check');
+      const log = card.querySelector('.log');
+      if(!check) return;
+      if(today.done && today.done[exId]) check.classList.add('on');
+      if(today.notes && today.notes[exId]!=null) log.value = today.notes[exId];
+      check.addEventListener('click', async ()=>{
+        check.classList.toggle('on');
+        const d = ensureToday();
+        if(check.classList.contains('on')) d.done[exId]=true; else delete d.done[exId];
+        await saveState(); updateDayProgress(panel.dataset.day); updateStats();
+      });
+      log.addEventListener('change', async ()=>{
+        const d = ensureToday();
+        if(log.value.trim()) d.notes[exId]=log.value.trim(); else delete d.notes[exId];
+        await saveState();
+      });
+    });
+    updateDayProgress(panel.dataset.day);
+  });
+}
+function ensureToday(){ const k=todayKey(); if(!ST.days[k]) ST.days[k]={done:{},notes:{}}; if(!ST.days[k].done)ST.days[k].done={}; if(!ST.days[k].notes)ST.days[k].notes={}; return ST.days[k]; }
+
+function updateDayProgress(dayKey){
+  const day = DAYS.find(d=>d.key===dayKey); if(!day||day.rest) return;
+  const today = ST.days[todayKey()]||{done:{}};
+  const doneCount = day.ex.filter(k=> today.done && today.done[EX[k].id]).length;
+  const pct = Math.round(doneCount/day.ex.length*100);
+  const bar=document.querySelector(`[data-bar="${dayKey}"]`);
+  const txt=document.querySelector(`[data-progtxt="${dayKey}"]`);
+  if(bar) bar.style.width=pct+"%";
+  if(txt) txt.textContent=`${doneCount} / ${day.ex.length} done`;
+}
+
+function updateStats(){
+  document.getElementById("stTotal").textContent = ST.total||0;
+  document.getElementById("stStreak").textContent = ST.streak||0;
+  const today = ST.days[todayKey()]||{done:{}};
+  const checked = today.done? Object.keys(today.done).length : 0;
+  const pct = checked? Math.min(100, Math.round(checked/5*100)) : 0;
+  document.getElementById("stToday").textContent = pct+"%";
+  const done = ST.last===todayKey();
+  const btn=document.getElementById("completeBtn");
+  if(done){ btn.textContent="Done for today ✓"; btn.disabled=true; }
+  else{ btn.textContent="Complete today 💪"; btn.disabled=false; }
+}
+
+function yesterdayKey(){ const d=new Date(); d.setDate(d.getDate()-1); return d.toLocaleDateString("en-CA"); }
+
+async function completeToday(){
+  if(!ST.name){ document.getElementById("nameInput").focus(); toast("Add your name first"); return; }
+  if(ST.last===todayKey()){ toast("Already logged today"); return; }
+  ST.total = (ST.total||0)+1;
+  ST.streak = (ST.last===yesterdayKey())? (ST.streak||0)+1 : 1;
+  ST.last = todayKey();
+  await saveState();
+  updateStats();
+  await pushLeaderboard();
+  toast("Workout logged! 🔥 Streak "+ST.streak);
+  await renderLeaderboard();
+}
+
+function lbKey(name){ return "lb:"+name.toLowerCase().replace(/[^a-z0-9]/g,"_").slice(0,40); }
+async function pushLeaderboard(){
+  if(!ST.name) return;
+  const entry = JSON.stringify({name:ST.name, workouts:ST.total, streak:ST.streak, updated:Date.now()});
+  await store.set(lbKey(ST.name), entry, true);
+}
+async function renderLeaderboard(){
+  const body=document.getElementById("lbBody");
+  const keys = await store.list("lb:", true);
+  const rows=[];
+  for(const k of keys){
+    const raw=await store.get(k, true);
+    if(!raw) continue;
+    try{ rows.push(JSON.parse(raw)); }catch(e){}
+  }
+  if(!hasStore){
+    document.getElementById("lbNote").innerHTML = "This shared leaderboard runs on Claude's storage. On the live Claude page your friends' scores appear here — if you publish this file elsewhere (like GitHub Pages) the tracker still works for you, but the shared leaderboard needs Claude.";
+  }
+  if(rows.length===0){ body.innerHTML=`<tr><td colspan="4" class="empty">No one's logged a workout yet. Complete today's session to be first! 🥇</td></tr>`; return; }
+  rows.sort((a,b)=> (b.workouts-a.workouts) || (b.streak-a.streak));
+  const medal=["🥇","🥈","🥉"];
+  body.innerHTML = rows.map((r,i)=>{
+    const me = ST.name && r.name.toLowerCase()===ST.name.toLowerCase();
+    return `<tr class="${me?'me':''}"><td class="rank">${medal[i]||(i+1)}</td><td class="who">${escapeHTML(r.name)}</td><td><span class="num">${r.workouts}</span></td><td><span class="num">${r.streak}</span> 🔥</td></tr>`;
+  }).join("");
+}
+function escapeHTML(s){ return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+function startAnimation(){
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce) return;
+  document.querySelectorAll('.demo img').forEach(img=>{ const p=new Image(); p.src=img.dataset.f1; });
+  let flip=false;
+  setInterval(()=>{
+    flip=!flip;
+    document.querySelectorAll('.demo img').forEach(img=>{
+      if(img.style.display==='none') return;
+      img.src = flip? img.dataset.f1 : img.dataset.f0;
+    });
+  }, 900);
+}
+
+(async function init(){
+  renderStatic();
+  await loadState();
+  const nameInput=document.getElementById("nameInput");
+  nameInput.value = ST.name||"";
+  nameInput.addEventListener("change", async ()=>{
+    ST.name = nameInput.value.trim().slice(0,24);
+    await saveState();
+    if(ST.name && ST.last) await pushLeaderboard();
+    await renderLeaderboard();
+  });
+  document.getElementById("completeBtn").addEventListener("click", completeToday);
+  document.getElementById("refreshLb").addEventListener("click", async ()=>{ await renderLeaderboard(); toast("Refreshed"); });
+  hydrateDayCards();
+  updateStats();
+  startAnimation();
+  await renderLeaderboard();
+})();
+</script>
+</body>
+</html>
